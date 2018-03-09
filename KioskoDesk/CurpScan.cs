@@ -1,15 +1,11 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
-using KioskoDesk.Model;
-using Patagames.Ocr;
-using Patagames.Ocr.Enums;
+using BarcodeLib.BarcodeReader;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +13,11 @@ using System.Windows.Forms;
 
 namespace KioskoDesk
 {
-    public partial class TitualarResumen : Form
+    public partial class CurpScan : Form
     {
-        private bool ExisteDispositivo = false;
         private FilterInfoCollection DispositivoDeVideo;
         private VideoCaptureDevice FuenteDeVideo = null;
-
-        KoiscoEntities db = new KoiscoEntities();
-        int poliza = 0;
+        private bool ExisteDispositivo = false;
 
         public void CargarDispositivos(FilterInfoCollection Dispositivos)
         {
@@ -51,29 +44,26 @@ namespace KioskoDesk
             }
         }
 
-        public TitualarResumen(int _poliza)
+        public CurpScan()
         {
-            poliza = _poliza;
             InitializeComponent();
-            var datosgenerales = db.vis_POLIZA_INTEGRANTE.Where(w => w.poli_id == poliza && w.poli_tipo == 1).ToList();
-
-            lblNombre.Text = datosgenerales[0].poli_integrante;
-            lblCURP.Text = datosgenerales[0].poli_integrante;
-            lblDomicilio.Text = datosgenerales[0].poli_integrante;
-            lblFecha.Text = datosgenerales[0].poli_vigencia.ToString();
-
             BuscarDispositivos();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            timer1.Enabled = true;
             FuenteDeVideo = new VideoCaptureDevice(DispositivoDeVideo[cbxDispositivos.SelectedIndex].MonikerString);
             FuenteDeVideo.NewFrame += new NewFrameEventHandler(Video_NuevoFrame);
 
-             FuenteDeVideo.Start();
-     
-            
+            FuenteDeVideo.Start();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            TerminarFuenteDeVideo();
+
         }
 
         public void TerminarFuenteDeVideo()
@@ -82,7 +72,7 @@ namespace KioskoDesk
                 if (FuenteDeVideo.IsRunning)
                 {
                     FuenteDeVideo.SignalToStop();
-                   
+
                     FuenteDeVideo = null;
                 }
 
@@ -95,35 +85,27 @@ namespace KioskoDesk
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-
-            
-            TerminarFuenteDeVideo();
-
             if (EspacioCamara.Image != null)
             {
-                //Save First
-                Bitmap varBmp = new Bitmap(EspacioCamara.Image);
-                
-                Bitmap newBitmap = new Bitmap(varBmp);
-                string physicalPath = Path.Combine("C:/root/JuntaFiles/", "a.jpg");
-                varBmp.Save(physicalPath, ImageFormat.Jpeg);
-                //varBmp.Save(@"C:\a.png", ImageFormat.Png);
-                //Now Dispose to free the memory
-                varBmp.Dispose();
-                varBmp = null;
-            }
-            else
-            { MessageBox.Show("null exception"); }
-
-
-            using (var api = OcrApi.Create())
-            {
-                api.Init(Languages.English);
-                string plainText = api.GetTextFromImage("C:/captura.png");
-
-                lblOcr.Text = plainText;
+                //IBTENER IMAGEN DE LA WEBCAM
+                Bitmap img = new Bitmap(EspacioCamara.Image);
+                //UTILIZAR LA LIBRERIA Y LEER EL CÓDIGO
+                string[] resultados = BarcodeReader.read(img, BarcodeReader.QRCODE);
+                //QUITAR LA IMAGEN DE MEMORIA
+                img.Dispose();
+                //OBTENER LAS LECTURAS CUANDO SE LEA ALGO
+                if (resultados != null && resultados.Count() > 0)
+                {
+                    //AGREGAR EL TEXTO OBTENIDO A LA LISTA
+                    if (resultados[0].IndexOf("1111") != -1)
+                    {
+                        //QUITAR EL CODIGO DE VERIFICACION
+                        resultados[0] = resultados[0].Replace("1111", "");
+                        listBox1.Items.Add(resultados[0]);
+                    }
+                }
             }
         }
     }

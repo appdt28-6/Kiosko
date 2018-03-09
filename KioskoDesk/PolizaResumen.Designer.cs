@@ -25,7 +25,6 @@
             this.btnRegresar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnAfiliacion = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -123,9 +122,15 @@
             // 
             // grdPoliza
             // 
+            this.grdPoliza.AllowDrop = true;
+            this.grdPoliza.AllowUserToAddRows = false;
+            this.grdPoliza.AllowUserToDeleteRows = false;
+            this.grdPoliza.AllowUserToResizeColumns = false;
+            this.grdPoliza.AllowUserToResizeRows = false;
             this.grdPoliza.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdPoliza.Location = new System.Drawing.Point(6, 21);
             this.grdPoliza.Name = "grdPoliza";
+            this.grdPoliza.ReadOnly = true;
             this.grdPoliza.RowTemplate.Height = 24;
             this.grdPoliza.Size = new System.Drawing.Size(771, 190);
             this.grdPoliza.TabIndex = 0;
@@ -168,15 +173,6 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Fecha de vigencia:";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(555, 61);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 17);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Fecha de vigencia:";
-            // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
@@ -190,9 +186,9 @@
             // 
             this.btnAfiliacion.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnAfiliacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAfiliacion.Location = new System.Drawing.Point(145, 539);
+            this.btnAfiliacion.Location = new System.Drawing.Point(104, 517);
             this.btnAfiliacion.Name = "btnAfiliacion";
-            this.btnAfiliacion.Size = new System.Drawing.Size(191, 59);
+            this.btnAfiliacion.Size = new System.Drawing.Size(303, 77);
             this.btnAfiliacion.TabIndex = 12;
             this.btnAfiliacion.Text = "Reafiliacion";
             this.btnAfiliacion.UseVisualStyleBackColor = false;
@@ -206,7 +202,6 @@
             this.Controls.Add(this.btnAfiliacion);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.btnRegresar);
             this.Controls.Add(this.lblPoliza);
@@ -214,6 +209,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Name = "PolizaResumen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PolizaResumen";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -240,7 +236,6 @@
         private System.Windows.Forms.Button btnRegresar;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button btnAfiliacion;
     }

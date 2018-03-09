@@ -46,11 +46,11 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(554, 123);
+            this.button1.Location = new System.Drawing.Point(503, 123);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 57);
+            this.button1.Size = new System.Drawing.Size(170, 57);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Revisar";
+            this.button1.Text = "Verificar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -71,6 +71,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "ConsultaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta";
             this.ResumeLayout(false);
             this.PerformLayout();

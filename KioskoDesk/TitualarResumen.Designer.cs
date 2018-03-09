@@ -43,6 +43,8 @@
             this.cbxDispositivos = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.lblOcr = new System.Windows.Forms.Label();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EspacioCamara)).BeginInit();
             this.SuspendLayout();
@@ -175,6 +177,7 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(61, 467);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(272, 97);
@@ -192,11 +195,31 @@
             this.lblOcr.TabIndex = 13;
             this.lblOcr.Text = "label7";
             // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(785, 124);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(46, 17);
+            this.lblFecha.TabIndex = 15;
+            this.lblFecha.Text = "label2";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(652, 124);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 17);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Fecha de vigencia:";
+            // 
             // TitualarResumen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 677);
+            this.Controls.Add(this.lblFecha);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lblOcr);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.cbxDispositivos);
@@ -207,6 +230,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "TitualarResumen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TitualarResumen";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -233,5 +257,7 @@
         private System.Windows.Forms.ComboBox cbxDispositivos;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lblOcr;
+        private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Label label7;
     }
 }

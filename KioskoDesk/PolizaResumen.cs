@@ -21,18 +21,19 @@ namespace KioskoDesk
         KoiscoEntities db = new KoiscoEntities();
         int poliza;
         PolizaRead lee = new PolizaRead();
-
+        private PrintDocument printDocument1 = new PrintDocument();
+       
 
         public PolizaResumen(int _poliza)
         {
             poliza = _poliza;
             //btnAfiliacion.Hide();
-            
+
             InitializeComponent();
 
             grdPoliza.DataSource = lee.fillPoliza(poliza);
 
-            var datosgenerales= db.vis_POLIZA_INTEGRANTE.Where(w => w.poli_id == poliza && w.poli_tipo == 1).ToList();
+            var datosgenerales = db.vis_POLIZA_INTEGRANTE.Where(w => w.poli_id == poliza && w.poli_tipo == 1).ToList();
 
             lblNombre.Text = datosgenerales[0].poli_integrante;
             lblCURP.Text = datosgenerales[0].poli_integrante;
@@ -49,89 +50,35 @@ namespace KioskoDesk
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    streamToPrint = new StreamReader
-            //       ("C:\\texto.txt");
-            //    try
-            //    {
-            //        printFont = new Font("Arial", 10);
-            //        PrintDocument pd = new PrintDocument();
-            //        pd.PrintPage += new PrintPageEventHandler
-            //           (this.pd_PrintPage);
-            //        pd.Print();
-            //    }
-            //    finally
-            //    {
-            //        streamToPrint.Close();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-
-            //}
-
-            string Filepath = @"C:\polizaejemplo.pdf";
-            // The name of the PDF that will be printed (just to be shown in the print queue)
-            string Filename = "polizaejemplo.pdf";
-            // The name of the printer that you want to use
-            // Note: Check step 1 from the B alternative to see how to list
-            // the names of all the available printers with C#
-            string PrinterName = "Canon G3000 series Printer";
-
-            // Create an instance of the Printer
-            IPrinter printer = new Printer();
-            try {
-            // Print the file
-            printer.PrintRawFile(PrinterName, Filepath, Filename);
-                //printer.PrintRawStream
-            }
-            catch(Exception q) { }
+            SendToPrinter();
+            printDocument1.Print();
         }
 
         private void btnAfiliacion_Click(object sender, EventArgs e)
         {
-            ReafiliacionForm reaf = new ReafiliacionForm();
+            ReafiliacionForm reaf = new ReafiliacionForm(poliza);
             reaf.Show();
 
-            
+
         }
 
+        private void SendToPrinter()
+        {
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.Verb = "print";                          // Seleccionar el programa para imprimir PDF por defecto
+            info.FileName = @"C:\polizaejemplo.pdf";         // Ruta hacia el fichero que quieres imprimir
+            info.CreateNoWindow = true;                   // Hacerlo sin mostrar ventana
+            info.WindowStyle = ProcessWindowStyle.Hidden; // Y de forma oculta
+            Process p = new Process();
+            p.StartInfo = info;
+            p.Start();  // Lanza el proceso
 
+            p.WaitForInputIdle();
+            System.Threading.Thread.Sleep(10);          // Espera 3 segundos
 
-        //private void pd_PrintPage(object sender, PrintPageEventArgs ev)
-        //{
-        //    float linesPerPage = 0;
-        //    float yPos = 0;
-        //    int count = 0;
-        //    float leftMargin = ev.MarginBounds.Left;
-        //    float topMargin = ev.MarginBounds.Top;
-        //    string line = null;
-
-        //    // Calculate the number of lines per page.
-        //    linesPerPage = ev.MarginBounds.Height /
-        //       printFont.GetHeight(ev.Graphics);
-
-        //    // Print each line of the file.
-        //    while (count < linesPerPage &&
-        //       ((line = streamToPrint.ReadLine()) != null))
-        //    {
-        //        yPos = topMargin + (count *
-        //           printFont.GetHeight(ev.Graphics));
-        //        ev.Graphics.DrawString(line, printFont, Brushes.Black,
-        //           leftMargin, yPos, new StringFormat());
-        //        count++;
-        //    }
-
-        //    // If more lines exist, print another page.
-        //    if (line != null)
-        //        ev.HasMorePages = true;
-        //    else
-        //        ev.HasMorePages = false;
-        //}
-
-
+            if (false == p.CloseMainWindow())
+                p.Kill();
+        }
 
     }
 }

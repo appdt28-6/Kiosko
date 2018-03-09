@@ -25,3 +25,5 @@ C:\Users\mmendez\Documents\REESP\KioskoDesk\KioskoDesk\obj\Debug\KioskoDesk.exe
 C:\Users\mmendez\Documents\REESP\KioskoDesk\KioskoDesk\obj\Debug\KioskoDesk.pdb
 C:\Users\mmendez\Documents\REESP\KioskoDesk\KioskoDesk\bin\Debug\x64\tesseract.dll
 C:\Users\mmendez\Documents\REESP\KioskoDesk\KioskoDesk\bin\Debug\x86\tesseract.dll
+C:\Users\mmendez\Documents\REESP\KioskoDesk\KioskoDesk\bin\Debug\BarcodeLib.BarcodeReader.dll
+C:\Users\mmendez\Documents\REESP\KioskoDesk\KioskoDesk\obj\Debug\KioskoDesk.CurpScan.resources

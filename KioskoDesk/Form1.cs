@@ -29,6 +29,8 @@ namespace KioskoDesk
             PolizaResumen consul = new PolizaResumen(id);
             consul.Show();
 
+            this.Close();
+
 
         }
     }
