@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KoiscoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Koisco.dbo.BUSCA_FOLIOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="BUSCA_FOLIOS">
+          <Key>
+            <PropertyRef Name="FOLIO_FAMILIA" />
+          </Key>
+          <Property Name="FOLIO_FAMILIA" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POLIZA_INTGRANTES">
+          <Key>
+            <PropertyRef Name="poli_int_id" />
+          </Key>
+          <Property Name="poli_int_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="poli_folio" Type="varchar" MaxLength="50" />
+          <Property Name="poli_consecutivo" Type="int" />
+          <Property Name="poli_integrante" Type="varchar" MaxLength="50" />
+          <Property Name="poli_tipo" Type="int" />
+        </EntityType>
+        <EntityType Name="POLIZAS">
+          <Key>
+            <PropertyRef Name="poli_id" />
+          </Key>
+          <Property Name="poli_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="poli_folio" Type="varchar" MaxLength="50" />
+          <Property Name="poli_vigencia" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Koisco.dbo.vis_POLIZA_INTEGRANTE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vis_POLIZA_INTEGRANTE">
+          <Key>
+            <PropertyRef Name="poli_id" />
+            <PropertyRef Name="poli_int_id" />
+          </Key>
+          <Property Name="poli_id" Type="int" Nullable="false" />
+          <Property Name="poli_folio" Type="varchar" MaxLength="50" />
+          <Property Name="poli_int_id" Type="int" Nullable="false" />
+          <Property Name="poli_consecutivo" Type="int" />
+          <Property Name="poli_integrante" Type="varchar" MaxLength="50" />
+          <Property Name="poli_tipo" Type="int" />
+          <Property Name="poli_vigencia" Type="date" />
+        </EntityType>
+        <EntityContainer Name="KoiscoModelStoreContainer">
+          <EntitySet Name="POLIZA_INTGRANTES" EntityType="Self.POLIZA_INTGRANTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POLIZAS" EntityType="Self.POLIZAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BUSCA_FOLIOS" EntityType="Self.BUSCA_FOLIOS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BUSCA_FOLIOS].[FOLIO_FAMILIA] AS [FOLIO_FAMILIA]
+    FROM [dbo].[BUSCA_FOLIOS] AS [BUSCA_FOLIOS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vis_POLIZA_INTEGRANTE" EntityType="Self.vis_POLIZA_INTEGRANTE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vis_POLIZA_INTEGRANTE].[poli_id] AS [poli_id], 
+    [vis_POLIZA_INTEGRANTE].[poli_folio] AS [poli_folio], 
+    [vis_POLIZA_INTEGRANTE].[poli_int_id] AS [poli_int_id], 
+    [vis_POLIZA_INTEGRANTE].[poli_consecutivo] AS [poli_consecutivo], 
+    [vis_POLIZA_INTEGRANTE].[poli_integrante] AS [poli_integrante], 
+    [vis_POLIZA_INTEGRANTE].[poli_tipo] AS [poli_tipo], 
+    [vis_POLIZA_INTEGRANTE].[poli_vigencia] AS [poli_vigencia]
+    FROM [dbo].[vis_POLIZA_INTEGRANTE] AS [vis_POLIZA_INTEGRANTE]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KoiscoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BUSCA_FOLIOS">
+          <Key>
+            <PropertyRef Name="FOLIO_FAMILIA" />
+          </Key>
+          <Property Name="FOLIO_FAMILIA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="KoiscoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BUSCA_FOLIOS" EntityType="Self.BUSCA_FOLIOS" />
+          <EntitySet Name="POLIZAS" EntityType="KoiscoModel.POLIZAS" />
+          <EntitySet Name="POLIZA_INTGRANTES" EntityType="KoiscoModel.POLIZA_INTGRANTES" />
+          <EntitySet Name="vis_POLIZA_INTEGRANTE" EntityType="KoiscoModel.vis_POLIZA_INTEGRANTE" />
+        </EntityContainer>
+        <EntityType Name="POLIZAS">
+          <Key>
+            <PropertyRef Name="poli_id" />
+          </Key>
+          <Property Name="poli_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poli_folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poli_vigencia" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="POLIZA_INTGRANTES">
+          <Key>
+            <PropertyRef Name="poli_int_id" />
+          </Key>
+          <Property Name="poli_int_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poli_folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poli_consecutivo" Type="Int32" />
+          <Property Name="poli_integrante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poli_tipo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vis_POLIZA_INTEGRANTE">
+          <Key>
+            <PropertyRef Name="poli_id" />
+            <PropertyRef Name="poli_int_id" />
+          </Key>
+          <Property Name="poli_id" Type="Int32" Nullable="false" />
+          <Property Name="poli_folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poli_int_id" Type="Int32" Nullable="false" />
+          <Property Name="poli_consecutivo" Type="Int32" />
+          <Property Name="poli_integrante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poli_tipo" Type="Int32" />
+          <Property Name="poli_vigencia" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KoiscoModelStoreContainer" CdmEntityContainer="KoiscoEntities">
+          <EntitySetMapping Name="BUSCA_FOLIOS">
+            <EntityTypeMapping TypeName="KoiscoModel.BUSCA_FOLIOS">
+              <MappingFragment StoreEntitySet="BUSCA_FOLIOS">
+                <ScalarProperty Name="FOLIO_FAMILIA" ColumnName="FOLIO_FAMILIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POLIZAS">
+            <EntityTypeMapping TypeName="KoiscoModel.POLIZAS">
+              <MappingFragment StoreEntitySet="POLIZAS">
+                <ScalarProperty Name="poli_vigencia" ColumnName="poli_vigencia" />
+                <ScalarProperty Name="poli_folio" ColumnName="poli_folio" />
+                <ScalarProperty Name="poli_id" ColumnName="poli_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POLIZA_INTGRANTES">
+            <EntityTypeMapping TypeName="KoiscoModel.POLIZA_INTGRANTES">
+              <MappingFragment StoreEntitySet="POLIZA_INTGRANTES">
+                <ScalarProperty Name="poli_tipo" ColumnName="poli_tipo" />
+                <ScalarProperty Name="poli_integrante" ColumnName="poli_integrante" />
+                <ScalarProperty Name="poli_consecutivo" ColumnName="poli_consecutivo" />
+                <ScalarProperty Name="poli_folio" ColumnName="poli_folio" />
+                <ScalarProperty Name="poli_int_id" ColumnName="poli_int_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_POLIZA_INTEGRANTE">
+            <EntityTypeMapping TypeName="KoiscoModel.vis_POLIZA_INTEGRANTE">
+              <MappingFragment StoreEntitySet="vis_POLIZA_INTEGRANTE">
+                <ScalarProperty Name="poli_vigencia" ColumnName="poli_vigencia" />
+                <ScalarProperty Name="poli_tipo" ColumnName="poli_tipo" />
+                <ScalarProperty Name="poli_integrante" ColumnName="poli_integrante" />
+                <ScalarProperty Name="poli_consecutivo" ColumnName="poli_consecutivo" />
+                <ScalarProperty Name="poli_int_id" ColumnName="poli_int_id" />
+                <ScalarProperty Name="poli_folio" ColumnName="poli_folio" />
+                <ScalarProperty Name="poli_id" ColumnName="poli_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

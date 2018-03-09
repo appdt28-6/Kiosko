@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KoiscoModelStoreContainer" CdmEntityContainer="KoiscoEntities">
+    <EntitySetMapping Name="BUSCA_FOLIOS">
+      <EntityTypeMapping TypeName="KoiscoModel.BUSCA_FOLIOS">
+        <MappingFragment StoreEntitySet="BUSCA_FOLIOS">
+          <ScalarProperty Name="FOLIO_FAMILIA" ColumnName="FOLIO_FAMILIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POLIZAS">
+      <EntityTypeMapping TypeName="KoiscoModel.POLIZAS">
+        <MappingFragment StoreEntitySet="POLIZAS">
+          <ScalarProperty Name="poli_vigencia" ColumnName="poli_vigencia" />
+          <ScalarProperty Name="poli_folio" ColumnName="poli_folio" />
+          <ScalarProperty Name="poli_id" ColumnName="poli_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POLIZA_INTGRANTES">
+      <EntityTypeMapping TypeName="KoiscoModel.POLIZA_INTGRANTES">
+        <MappingFragment StoreEntitySet="POLIZA_INTGRANTES">
+          <ScalarProperty Name="poli_tipo" ColumnName="poli_tipo" />
+          <ScalarProperty Name="poli_integrante" ColumnName="poli_integrante" />
+          <ScalarProperty Name="poli_consecutivo" ColumnName="poli_consecutivo" />
+          <ScalarProperty Name="poli_folio" ColumnName="poli_folio" />
+          <ScalarProperty Name="poli_int_id" ColumnName="poli_int_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vis_POLIZA_INTEGRANTE">
+      <EntityTypeMapping TypeName="KoiscoModel.vis_POLIZA_INTEGRANTE">
+        <MappingFragment StoreEntitySet="vis_POLIZA_INTEGRANTE">
+          <ScalarProperty Name="poli_vigencia" ColumnName="poli_vigencia" />
+          <ScalarProperty Name="poli_tipo" ColumnName="poli_tipo" />
+          <ScalarProperty Name="poli_integrante" ColumnName="poli_integrante" />
+          <ScalarProperty Name="poli_consecutivo" ColumnName="poli_consecutivo" />
+          <ScalarProperty Name="poli_int_id" ColumnName="poli_int_id" />
+          <ScalarProperty Name="poli_folio" ColumnName="poli_folio" />
+          <ScalarProperty Name="poli_id" ColumnName="poli_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

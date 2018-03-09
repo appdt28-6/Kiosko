@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KoiscoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BUSCA_FOLIOS">
+    <Key>
+      <PropertyRef Name="FOLIO_FAMILIA" />
+    </Key>
+    <Property Name="FOLIO_FAMILIA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="KoiscoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BUSCA_FOLIOS" EntityType="Self.BUSCA_FOLIOS" />
+    <EntitySet Name="POLIZAS" EntityType="KoiscoModel.POLIZAS" />
+    <EntitySet Name="POLIZA_INTGRANTES" EntityType="KoiscoModel.POLIZA_INTGRANTES" />
+    <EntitySet Name="vis_POLIZA_INTEGRANTE" EntityType="KoiscoModel.vis_POLIZA_INTEGRANTE" />
+  </EntityContainer>
+  <EntityType Name="POLIZAS">
+    <Key>
+      <PropertyRef Name="poli_id" />
+    </Key>
+    <Property Name="poli_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="poli_folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="poli_vigencia" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="POLIZA_INTGRANTES">
+    <Key>
+      <PropertyRef Name="poli_int_id" />
+    </Key>
+    <Property Name="poli_int_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="poli_folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="poli_consecutivo" Type="Int32" />
+    <Property Name="poli_integrante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="poli_tipo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vis_POLIZA_INTEGRANTE">
+    <Key>
+      <PropertyRef Name="poli_id" />
+      <PropertyRef Name="poli_int_id" />
+    </Key>
+    <Property Name="poli_id" Type="Int32" Nullable="false" />
+    <Property Name="poli_folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="poli_int_id" Type="Int32" Nullable="false" />
+    <Property Name="poli_consecutivo" Type="Int32" />
+    <Property Name="poli_integrante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="poli_tipo" Type="Int32" />
+    <Property Name="poli_vigencia" Type="DateTime" Precision="0" />
+  </EntityType>
+</Schema>

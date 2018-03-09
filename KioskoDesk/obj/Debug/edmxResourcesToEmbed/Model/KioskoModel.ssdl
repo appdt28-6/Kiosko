@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KoiscoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Koisco.dbo.BUSCA_FOLIOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="BUSCA_FOLIOS">
+    <Key>
+      <PropertyRef Name="FOLIO_FAMILIA" />
+    </Key>
+    <Property Name="FOLIO_FAMILIA" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POLIZA_INTGRANTES">
+    <Key>
+      <PropertyRef Name="poli_int_id" />
+    </Key>
+    <Property Name="poli_int_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="poli_folio" Type="varchar" MaxLength="50" />
+    <Property Name="poli_consecutivo" Type="int" />
+    <Property Name="poli_integrante" Type="varchar" MaxLength="50" />
+    <Property Name="poli_tipo" Type="int" />
+  </EntityType>
+  <EntityType Name="POLIZAS">
+    <Key>
+      <PropertyRef Name="poli_id" />
+    </Key>
+    <Property Name="poli_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="poli_folio" Type="varchar" MaxLength="50" />
+    <Property Name="poli_vigencia" Type="date" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Koisco.dbo.vis_POLIZA_INTEGRANTE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vis_POLIZA_INTEGRANTE">
+    <Key>
+      <PropertyRef Name="poli_id" />
+      <PropertyRef Name="poli_int_id" />
+    </Key>
+    <Property Name="poli_id" Type="int" Nullable="false" />
+    <Property Name="poli_folio" Type="varchar" MaxLength="50" />
+    <Property Name="poli_int_id" Type="int" Nullable="false" />
+    <Property Name="poli_consecutivo" Type="int" />
+    <Property Name="poli_integrante" Type="varchar" MaxLength="50" />
+    <Property Name="poli_tipo" Type="int" />
+    <Property Name="poli_vigencia" Type="date" />
+  </EntityType>
+  <EntityContainer Name="KoiscoModelStoreContainer">
+    <EntitySet Name="POLIZA_INTGRANTES" EntityType="Self.POLIZA_INTGRANTES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POLIZAS" EntityType="Self.POLIZAS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUSCA_FOLIOS" EntityType="Self.BUSCA_FOLIOS" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BUSCA_FOLIOS].[FOLIO_FAMILIA] AS [FOLIO_FAMILIA]
+    FROM [dbo].[BUSCA_FOLIOS] AS [BUSCA_FOLIOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vis_POLIZA_INTEGRANTE" EntityType="Self.vis_POLIZA_INTEGRANTE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vis_POLIZA_INTEGRANTE].[poli_id] AS [poli_id], 
+    [vis_POLIZA_INTEGRANTE].[poli_folio] AS [poli_folio], 
+    [vis_POLIZA_INTEGRANTE].[poli_int_id] AS [poli_int_id], 
+    [vis_POLIZA_INTEGRANTE].[poli_consecutivo] AS [poli_consecutivo], 
+    [vis_POLIZA_INTEGRANTE].[poli_integrante] AS [poli_integrante], 
+    [vis_POLIZA_INTEGRANTE].[poli_tipo] AS [poli_tipo], 
+    [vis_POLIZA_INTEGRANTE].[poli_vigencia] AS [poli_vigencia]
+    FROM [dbo].[vis_POLIZA_INTEGRANTE] AS [vis_POLIZA_INTEGRANTE]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
